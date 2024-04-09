@@ -16,7 +16,7 @@ Problems solved :
 
 **Project Euler 5: Smallest Multiple** as an one-liner with array formulas
 
-**Projet Euler 6: Sum Square Difference** (i) in the form of a spreadsheet, and (ii) as an one-liner with array formulas
+**Project Euler 6: Sum Square Difference** (i) in the form of a spreadsheet, and (ii) as an one-liner with array formulas
 
 Note : functions working on arrays: SEQUENCE, BITOR, SUM, MOD...
 
