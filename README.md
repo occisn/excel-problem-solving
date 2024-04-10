@@ -18,6 +18,16 @@ Problems solved :
 
 **Project Euler 6: Sum Square Difference** (i) in the form of a spreadsheet, and (ii) as an one-liner with array formulas
 
+...
+
+**Project Euler 11: Largest Product in a Grid** (i) in the form of a spreadsheet, and (ii) as an one-liner with array formulas
+
 Note : functions working on arrays: SEQUENCE, BITOR, SUM, MOD...
+
+Working with lambda: MAP, REDUCE, LAMBDA
+
+Useful: LET
+
+Useful functions: OFFSET
 
 (end of README)
