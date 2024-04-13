@@ -19,7 +19,7 @@ LAMBDA(N; IF(N=1; 0; INDEX( REDUCE({0;1}; SEQUENCE(N-1); LAMBDA(x;y; IF({1;0}; I
 
 (...)
 
-**Project Euler 5: Smallest Multiple** as an one-liner with array formulas
+**Project Euler 5: Smallest Multiple** (i) as an one-liner with array formulas, and (ii) with recursion
 
 **Project Euler 6: Sum Square Difference** (i) in the form of a spreadsheet, and (ii) as an one-liner with array formulas
 
