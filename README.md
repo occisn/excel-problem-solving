@@ -8,7 +8,7 @@ When possible, two solutions are presented:
 
 Problems solved :
 
-**Project Euler 1: Multiples of 3 and 5** (i) in the form of a spreadsheet, and (ii) as an one-liner with array formulas
+**Project Euler 1: Multiples of 3 and 5** (i) in the form of a spreadsheet, (ii) as an one-liner with array formulas, (iii) with recursion
 
 **Project Euler 2: Even Fibonacci numbers** (i) in the form of a spreadsheet, and (ii) as an one-liner with array formulas
 
