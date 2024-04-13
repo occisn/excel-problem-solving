@@ -12,9 +12,21 @@ Problems solved :
 
 **Project Euler 2: Even Fibonacci numbers** (i) in the form of a spreadsheet, and (ii) as an one-liner with array formulas
 
-Fibonacci :
+N-th Fibonacci number :
 ```
-LAMBDA(N; IF(N=1; 0; INDEX( REDUCE({0;1}; SEQUENCE(N-1); LAMBDA(x;y; IF({1;0}; INDEX(x;2); SUM(x)))); 2 )))
+LAMBDA(n; IF(n=1; 0; INDEX( REDUCE({0;1}; SEQUENCE(n-1); LAMBDA(x;y; IF({1;0}; INDEX(x;2); SUM(x)))); 2 )))
+```
+
+Make Fibonacci sequence:
+```
+LAMBDA(m
+   REDUCE(0;
+      SEQUENCE(m);
+      LAMBDA(current_array; n;
+         IF(n=0; 0;
+         IF(n=1; VSTACK(0;1);
+            LET(new_fibo; HSTACK(INDEX(current_array;n;1) + INDEX(current_array;n-1;1));
+                VSTACK(current_array;new_fibo)))))))
 ```
 
 (...)
