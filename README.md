@@ -41,7 +41,7 @@ Value: 3628800
 `SEQUENCE(10)` creates a vertical array 1...10
 
 Operations on arrays:  
-- `MAP` (filter)  
+- `MAP`  
 - `SUM`  
 - `REDUCE`  
 
@@ -124,6 +124,12 @@ Find the difference between the sum of the squares of the first one hundred natu
 Two solutions are proposed:  
 (i) in the form of a spreadsheet, and  
 (ii) as an one-liner with array formulas
+
+The one-liner with array formulas is essentially the following. It creates a 1...100 sequence, then uses `MAP` to square it number by number, and concludes.
+```
+=SUM( SEQUENCE(100) )^2
+      - SUM( MAP(SEQUENCE(100); LAMBDA(a;a^2)) )
+```
 
 ## Project Euler 8: Largest Product in a Series
 
