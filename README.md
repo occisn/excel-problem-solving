@@ -38,16 +38,44 @@ Value: 3628800
 
 ## Tools: array formulas
 
-`SEQUENCE(10)` creates a vertical array 1...10
+Create a vertical array:  
+- `SEQUENCE(10)` creates a vertical array 1...10  
+- trick: `IF({1;0}; 4; 5)` creates a vertical array with two elements: 4 and 5
+
+Return specific element of an array:  
+- `INDEX(array; row)`  
+- `INDEX(array;; column)`
 
 Operations on arrays:  
 - `MAP`  
 - `SUM`  
 - `REDUCE`  
+- `MAX`
+
+Some usual functions accept array and return array.  
+For instance:  
+- `MID` (substring) with a sequence of position in string; returns a horizontal array
 
 ## Tools: useful functions
 
-(later)
+substring: `MID`
+
+convert string to number: `VALUE`
+
+**Digits of a number:**  
+- number of digits: `LEN`  
+- M-th digit of N (counting from right): `MOD(QUOTIENT(N; 10^(M-1)); 10)`  
+- M-th digit of N (couting from left): `MOD(QUOTIENT(N; 10^(LEN(N)-M)); 10)`  
+- sum of digits of N (with separate identification of each digits):  
+`SUM(MAP(SEQUENCE(LEN(N)); LAMBDA(M; MOD(QUOTIENT(N; 10^(M-1)); 10))))`   
+- sum of digits of N (via 2-cell accumulator):  
+`INDEX(REDUCE(IF({1;0}; 0; N); SEQUENCE(LEN(N)); LAMBDA(ACC;N; IF({1;0}; INDEX(ACC; 1) + MOD(INDEX(ACC; 2); 10); QUOTIENT(INDEX(ACC; 2); 10)))); 1)`
+- product of digits of N (via 2-cell accumulator):  
+`INDEX(REDUCE(IF({1;0}; 1; N); SEQUENCE(LEN(N)); LAMBDA(ACC;N; IF({1;0}; INDEX(ACC; 1) * MOD(INDEX(ACC; 2); 10); QUOTIENT(INDEX(ACC; 2); 10)))); 1)`
+
+**Digits of a number expressed as a string:**  
+- convert string S to horizontal array of digits: `VALUE(MID(S; SEQUENCE(1; LEN(S)); 1))`  
+- multiply digits of a number expressed as a string S: `PRODUCT(VALUE(MID(S; SEQUENCE(1; LEN(S)); 1)))`
 
 ## Project Euler 1: Multiples of 3 or 5
 
