@@ -26,7 +26,6 @@ SUB(SUB; 10))
 ```
 Value: 3628800
 
-
 The same with tail-call recursion:
 ```
 =LET(
@@ -187,12 +186,7 @@ Find the thirteen adjacent digits in the 1000-digit number that have the greates
 
 Two solutions are proposed :  
 (i) in the form of a spreadsheet, and  
-(ii) as an one-liner with array formulas
-
-String to digits array:
-```
-LAMBDA(S;VALUE(MID(S;SEQUENCE(1;LEN(S));1)));
-```
+(ii) as an one-liner with array formulas (with two variants)
 
 ## Project Euler 11: Largest Product in a Grid
 
