@@ -104,6 +104,13 @@ Two solutions are proposed:
 (i) as an one-liner with array formulas, and  
 (ii) with recursion
 
+The recursion solution is similar to factorial above.
+
+The one-liner with array formulas is essentially the following. It creates a 1...20 sequence, then reduces it with the 'leas common multiple' (LCM) function:
+```
+=REDUCE(1; SEQUENCE(20); LAMBDA(a;v; LCM(a;v)))
+```
+
 ## Project Euler 6: Sum Square Difference
 
 _The sum of the squares of the first ten natural numbers is  
