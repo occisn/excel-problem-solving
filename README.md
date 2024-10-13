@@ -57,6 +57,9 @@ For instance:
 
 ## Tools: useful functions
 
+`OFFSET(cell; 0; 0; 1; 4)` refers to the range spanning from 'cell' with height 1 and width 4  
+`OFFSET(cell; 1; 2)` refers to the cell located 1 row below and 2 columns on the right of 'cell' 
+
 substring: `MID`
 
 convert string to number: `VALUE`
