@@ -59,6 +59,15 @@ Three solutions are proposed:
 (ii) as an one-liner with array formulas,  
 (iii) with recursion
 
+Recursion is implemented in the same way as factorial above.
+
+The one-liner with array formulas is essentially the following. It creates a sequence 1...999, filters it, and sums it.
+```
+=LET(
+MULTIPLE_OF_3_OR_5; LAMBDA(N; OR(MOD(N;3)=0; MOD(N;5)=0));
+FILTER_MULTIPLE_OF_3_OR_5; LAMBDA(N; IF(MULTIPLE_OF_3_OR_5(N); N; 0));
+SUM( MAP( SEQUENCE(999); FILTER_MULTIPLE_OF_3_OR_5)))
+```
 
 ## Project Euler 2: Even Fibonacci Numbers
 
