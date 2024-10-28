@@ -12,7 +12,7 @@ When possible, several solutions are presented:
 **Tools:** [recursion](#tools-recursion), [array formulas](#tools-array-formulas), [useful functions](#tools-useful-functions)
 
 **Project Euler problems:**
-[1](#project-euler-1-multiples-of-3-or-5), [2](#project-euler-2-even-fibonacci-numbers), ...,  [5](#project-euler-5-smallest-multiple), [6](#project-euler-6-sum-square-difference), ...,  [8](#project-euler-8-largest-product-in-a-series), ...,  [11](#project-euler-11-largest-product-in-a-grid)
+[1](#project-euler-1-multiples-of-3-or-5), [2](#project-euler-2-even-fibonacci-numbers), ...,  [4](#project-euler-4-largest-palindrome-product), [5](#project-euler-5-smallest-multiple), [6](#project-euler-6-sum-square-difference), ...,  [8](#project-euler-8-largest-product-in-a-series), ...,  [11](#project-euler-11-largest-product-in-a-grid)
 
 ## Tools: recursion
 
@@ -39,6 +39,8 @@ Value: 3628800
 
 Create a vertical array:  
 - `SEQUENCE(10)` creates a vertical array 1...10  
+- `SEQUENCE(1,10)` creates a vertical array 1...10  
+- `SEQUENCE(10)*SEQUENCE(10)` creates a 2D array 1...10 x 1...10  
 - trick: `IF({1;0}; 4; 5)` creates a vertical array with two elements: 4 and 5
 
 Return specific element of an array:  
@@ -85,9 +87,9 @@ _If we list all the natural numbers below 10 that are multiples of 3 or 5, we ge
 [(source)](https://projecteuler.net/problem=1)
 
 Three solutions are proposed:  
-(i) in the form of a spreadsheet,  
-(ii) as an one-liner with array formulas,  
-(iii) with recursion
+_(i)_ in the form of a spreadsheet,  
+_(ii)_ as an one-liner with array formulas,  
+_(iii)_ with recursion
 
 Recursion is implemented in the same way as factorial above.
 
@@ -106,8 +108,8 @@ By starting with 1 and 2, the first 10 terms will be: 1, 2, 3, 5, 8, 13, 21, 34,
 By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms._ [(source)](https://projecteuler.net/problem=2) 
 
 Two solutions are proposed:  
-(i) in the form of a spreadsheet, and  
-(ii) as an one-liner with array formulas
+_(i)_ in the form of a spreadsheet, and  
+_(ii)_ as an one-liner with array formulas
 
 N-th Fibonacci number :
 ```
@@ -126,13 +128,26 @@ LAMBDA(m
                 VSTACK(current_array;new_fibo)))))))
 ```
 
+## Project Euler 4: Largest Palindrome Product
+
+_A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit number is 9009 = 91 x 99. Find the largest palindrome made from the product of two 3-digit numbers._ [(source)](https://projecteuler.net/problem=4)
+
+Three solutions are proposed.
+
+In file A:  
+_(i)_ with recursion  
+_(ii)_ as an one-liner with array formulas
+
+In file B (around 19 Mo):  
+_(iii)_ in the form of a spreadsheet
+
 ## Project Euler 5: Smallest Multiple
 
 _2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder. What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?_ [(source)](https://projecteuler.net/problem=5)
 
 Two solutions are proposed:  
-(i) as an one-liner with array formulas, and  
-(ii) with recursion
+_(i)_ as an one-liner with array formulas, and  
+_(ii)_ with recursion
 
 The recursion solution is similar to factorial above.
 
@@ -152,8 +167,8 @@ Find the difference between the sum of the squares of the first one hundred natu
 [(source)](https://projecteuler.net/problem=6)
 
 Two solutions are proposed:  
-(i) in the form of a spreadsheet, and  
-(ii) as an one-liner with array formulas
+_(i)_ in the form of a spreadsheet, and  
+_(ii)_ as an one-liner with array formulas
 
 The one-liner with array formulas is essentially the following. It creates a 1...100 sequence, then uses `MAP` to square it number by number, and concludes.
 ```
@@ -188,8 +203,8 @@ Find the thirteen adjacent digits in the 1000-digit number that have the greates
 [(source)](https://projecteuler.net/problem=8)
 
 Two solutions are proposed :  
-(i) in the form of a spreadsheet, and  
-(ii) as an one-liner with array formulas (with two variants)
+_(i)_ in the form of a spreadsheet, and  
+_(ii)_ as an one-liner with array formulas (with two variants)
 
 ## Project Euler 11: Largest Product in a Grid
 
@@ -202,7 +217,7 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 [(source)](https://projecteuler.net/problem=11)
 
 Two solutions are proposed:  
-(i) in the form of a spreadsheet;  
-(ii) as an one-liner with array formulas
+_(i)_ in the form of a spreadsheet;  
+_(ii)_ as an one-liner with array formulas
 
 (end of README)
