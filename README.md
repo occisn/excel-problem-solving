@@ -12,7 +12,7 @@ When possible, several solutions are presented:
 **Tools:** [recursion](#tools-recursion), [array formulas](#tools-array-formulas), [useful functions](#tools-useful-functions)
 
 **Project Euler problems:**
-[1](#project-euler-1-multiples-of-3-or-5), [2](#project-euler-2-even-fibonacci-numbers), ...,  [4](#project-euler-4-largest-palindrome-product), [5](#project-euler-5-smallest-multiple), [6](#project-euler-6-sum-square-difference), ...,  [8](#project-euler-8-largest-product-in-a-series), ...,  [11](#project-euler-11-largest-product-in-a-grid)
+[1](#project-euler-1-multiples-of-3-or-5), [2](#project-euler-2-even-fibonacci-numbers), ...,  [4](#project-euler-4-largest-palindrome-product), [5](#project-euler-5-smallest-multiple), [6](#project-euler-6-sum-square-difference), ...,  [8](#project-euler-8-largest-product-in-a-series), ...,  [11](#project-euler-11-largest-product-in-a-grid), ..., [13](#project-euler-13-large-sum)
 
 ## Tools: recursion
 
@@ -33,7 +33,6 @@ SUB; LAMBDA(ME;ACC;N; IF(N=0; ACC; ME(ME;ACC*N; N-1)));
 SUB(SUB; 1; 10))
 ```
 Value: 3628800
-
 
 ## Tools: array formulas
 
@@ -59,11 +58,14 @@ For instance:
 
 ## Tools: useful functions
 
+**Operations on range:** 
 `OFFSET(cell; 0; 0; 1; 4)` refers to the range spanning from 'cell' with height 1 and width 4  
 `OFFSET(cell; 1; 2)` refers to the cell located 1 row below and 2 columns on the right of 'cell' 
 
+**Operations on strings:**  
 substring: `MID`
 
+**String to number:**  
 convert string to number: `VALUE`
 
 **Digits of a number:**  
@@ -255,5 +257,19 @@ MAX_DIAGONAL_1; MAX(MAP(D6:T22;LAMBDA(CELL;PRODUCT(CELL;OFFSET(CELL;1;1);OFFSET(
 MAX_DIAGONAL_2; MAX(MAP(D9:T25;LAMBDA(CELL;PRODUCT(CELL;OFFSET(CELL;-1;1);OFFSET(CELL;-2;2);OFFSET(CELL;-3;3)))));
 MAX(MAX_HORIZONTAL; MAX_VERTICAL;MAX_DIAGONAL_1;MAX_DIAGONAL_2))
 ```
+## Project Euler 13: Large Sum
+
+_Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.  
+37107287533902102798797998220837590246510135740250  
+[...]  
+53503534226472524250874054075591789781264330331690_  
+[(source)](https://projecteuler.net/problem=13)
+
+Two solutions are proposed:  
+_(i)_ in the form of a spreadsheet;  
+_(ii)_ as an one-liner **_TODO_**
+
+Excel cannot handle numbers with so many significant digits. But they can be stored in strings, and be manipulated under that form.  
+Solution _(i)_ breaks down each number into digits, and adds all digits from the right-most to the left-most, while keeping track of the carry.
 
 (end of README)
