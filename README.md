@@ -1,11 +1,12 @@
 # excel-problem-solving
 
-This hobby project uses Microsoft Excel (without VBA) to solve numeric puzzles as those proposed by Project Euler.
+This hobby project uses Microsoft Excel (**without VBA**) to solve numeric puzzles as those proposed by Project Euler.
 
 When possible, several solutions are presented:  
-- use of Excel spreadsheet capabilities (use of rows and columns),  
-- use of recursion,  
-- use of one-liners, taking advantage of array formulas.
+- spreadsheet capabilities (use of rows and columns),  
+- one-liner based on recursion,  
+- one-liner based on 2-cell accumulator,  
+- one-liner based on array formulas.
 
 ## Table of contents
 
@@ -89,13 +90,13 @@ _If we list all the natural numbers below 10 that are multiples of 3 or 5, we ge
 [(source)](https://projecteuler.net/problem=1)
 
 Three solutions are proposed:  
-_(i)_ in the form of a spreadsheet,  
-_(ii)_ as an one-liner with array formulas,  
-_(iii)_ with recursion
+_(i)_ spreadsheet capabilities (use of rows and columns),  
+_(ii)_ one-liner based on array formulas,  
+_(iii)_ one-liner based on recursion.
 
 Recursion is implemented in the same way as factorial above.
 
-The one-liner with array formulas is essentially the following. It creates a sequence 1...999, filters it, and sums it.
+The one-liner based on array formulas is essentially the following. It creates a sequence 1...999, filters it, and sums it.
 ```
 =LET(
 MULTIPLE_OF_3_OR_5; LAMBDA(N; OR(MOD(N;3)=0; MOD(N;5)=0));
@@ -112,8 +113,8 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 **TODO: to be improved**
 
 Two solutions are proposed:  
-_(i)_ in the form of a spreadsheet, and  
-_(ii)_ as an one-liner with array formulas
+_(i)_ spreadsheet capabilities (use of rows and columns),  
+_(ii)_ one-liner based on array formulas.
 
 N-th Fibonacci number :
 ```
@@ -140,7 +141,7 @@ Three solutions are proposed.
 
 In file A:
 
-_(i)_ with recursion:
+_(i)_ one-liner based on recursion:
 
 ```
 = LET(
@@ -153,7 +154,7 @@ SUB; LAMBDA(N;CURRENT_MAX;ME; IF(N=0; CURRENT_MAX; ME(N-1; MAX(CURRENT_MAX; SUBS
 SUB(NMAX; 0; SUB))
 ```
 
-_(ii)_ as an one-liner with array formulas, creating a 1...999 x 1...999 2D array:
+_(ii)_ one-liner based on array formulas, creating a 1...999 x 1...999 2D array:
 
 ```
 = LET(
@@ -173,8 +174,8 @@ _(iii)_ in the form of a spreadsheet
 _2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder. What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?_ [(source)](https://projecteuler.net/problem=5)
 
 Two solutions are proposed:  
-_(i)_ as an one-liner with array formulas, and  
-_(ii)_ with recursion
+_(i)_ one-liner based on array formulas,   
+_(ii)_ one-liner based on recursion.
 
 The recursion solution is similar to factorial above.
 
@@ -194,10 +195,10 @@ Find the difference between the sum of the squares of the first one hundred natu
 [(source)](https://projecteuler.net/problem=6)
 
 Two solutions are proposed:  
-_(i)_ in the form of a spreadsheet, and  
-_(ii)_ as an one-liner with array formulas
+_(i)_ spreadsheet capabilities (use of rows and columns),  
+_(ii)_ one-liner based on array formulas.
 
-The one-liner with array formulas is essentially the following. It creates a 1...100 sequence, then uses `MAP` to square it number by number, and concludes.
+The one-liner based on array formulas is essentially the following. It creates a 1...100 sequence, then uses `MAP` to square it number by number, and concludes.
 ```
 =SUM( SEQUENCE(100) )^2
       - SUM( MAP(SEQUENCE(100); LAMBDA(a;a^2)) )
@@ -230,8 +231,8 @@ Find the thirteen adjacent digits in the 1000-digit number that have the greates
 [(source)](https://projecteuler.net/problem=8)
 
 Two solutions are proposed :  
-_(i)_ in the form of a spreadsheet, and  
-_(ii)_ as an one-liner with array formulas (with two variants)
+_(i)_ spreadsheet capabilities (use of rows and columns),  
+_(ii)_ one-liner based on array formulas (with two variants).
 
 ## Project Euler 11: Largest Product in a Grid
 
@@ -244,8 +245,8 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 [(source)](https://projecteuler.net/problem=11)
 
 Two solutions are proposed:  
-_(i)_ in the form of a spreadsheet;  
-_(ii)_ as an one-liner with array formulas
+_(i)_ spreadsheet capabilities (use of rows and columns),  
+_(ii)_ one-liner based on array formulas.
 
 The one-liner is the following:
 
@@ -266,8 +267,8 @@ _Work out the first ten digits of the sum of the following one-hundred 50-digit 
 [(source)](https://projecteuler.net/problem=13)
 
 Two solutions are proposed:  
-_(i)_ in the form of a spreadsheet;  
-_(ii)_ as an one-liner **_TODO_**
+_(i)_ spreadsheet capabilities (use of rows and columns),  
+_(ii)_ one-liner. **_TODO_**
 
 Excel cannot handle numbers with so many significant digits. But they can be stored in strings, and be manipulated under that form.  
 Solution _(i)_ breaks down each number into digits, and adds all digits from the right-most to the left-most, while keeping track of the carry.
