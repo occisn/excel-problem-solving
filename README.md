@@ -141,7 +141,7 @@ Three solutions are proposed.
 
 In file A:
 
-_(i)_ one-liner based on recursion:
+_(i)_ one-liner based on double recursion:
 
 ```
 = LET(
