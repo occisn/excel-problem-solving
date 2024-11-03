@@ -5,8 +5,8 @@ This hobby project uses Microsoft Excel (**without VBA**) to solve numeric puzzl
 When possible, several solutions are presented:  
 - spreadsheet capabilities (use of rows and columns),  
 - one-liner based on recursion,  
-- one-liner based on 2-cell accumulator,  
-- one-liner based on array formulas.
+- one-liner based on array formulas: SEQUENCE, without LET  
+- one-liner based on array formulas: SEQUENCE + 2-cell accumulator, without LET
 
 ## Table of contents
 
@@ -98,10 +98,15 @@ Recursion is implemented in the same way as factorial above.
 
 The one-liner based on array formulas is essentially the following. It creates a sequence 1...999, filters it, and sums it.
 ```
-=LET(
+= LET(
 MULTIPLE_OF_3_OR_5; LAMBDA(N; OR(MOD(N;3)=0; MOD(N;5)=0));
 FILTER_MULTIPLE_OF_3_OR_5; LAMBDA(N; IF(MULTIPLE_OF_3_OR_5(N); N; 0));
 SUM( MAP( SEQUENCE(999); FILTER_MULTIPLE_OF_3_OR_5)))
+```
+
+~LET~ is used to improve readibility, but is not necessary:
+```
+= SUM( MAP( SEQUENCE(B21); LAMBDA(N; IF(OR(MOD(N;3)=0; MOD(N;5)=0); N; 0))))
 ```
 
 ## Project Euler 002: Even Fibonacci Numbers
