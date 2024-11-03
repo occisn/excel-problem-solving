@@ -3,10 +3,10 @@
 This hobby project uses Microsoft Excel (**without VBA**) to solve numeric puzzles as those proposed by Project Euler.
 
 When possible, several solutions are presented:  
-- spreadsheet capabilities (use of rows and columns),  
-- one-liner based on recursion,  
-- one-liner based on array formulas: SEQUENCE, without LET  
-- one-liner based on array formulas: SEQUENCE + 2-cell accumulator, without LET
+- spreadsheet capabilities (use of rows and columns)  
+- one-liner based on recursion  
+- one-liner based on array formulas: recursion converted into SEQUENCE+REDUCE  
+- one-liner based on array formulas: SEQUENCE etc
 
 ## Table of contents
 
@@ -38,6 +38,7 @@ Value: 3628800
 ## Tools: array formulas
 
 Create a vertical array:  
+- `{1;2;3;4;5}` creates a vertical array 1...5  
 - `SEQUENCE(10)` creates a vertical array 1...10  
 - `SEQUENCE(1,10)` creates a vertical array 1...10  
 - `SEQUENCE(10)*SEQUENCE(10)` creates a 2D array 1...10 x 1...10  
@@ -50,7 +51,7 @@ Return specific element of an array:
 Operations on arrays:  
 - `MAP`  
 - `SUM`  
-- `REDUCE`  
+- `REDUCE` (`REDUCE([initial_value], array, lambda(accumulateur, value, body))`)  
 - `MAX`
 
 Some usual functions accept array and return array.  
@@ -89,14 +90,23 @@ convert string to number: `VALUE`
 _If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000._
 [(source)](https://projecteuler.net/problem=1)
 
-Three solutions are proposed:  
-_(i)_ spreadsheet capabilities (use of rows and columns),  
-_(ii)_ one-liner based on array formulas,  
-_(iii)_ one-liner based on recursion.
+Three solutions are proposed:
+
+_(i)_ spreadsheet capabilities (use of rows and columns),
+
+_(ii)_ one-liner based on recursion
 
 Recursion is implemented in the same way as factorial above.
 
-The one-liner based on array formulas is essentially the following. It creates a sequence 1...999, filters it, and sums it.
+_(iii)_ one-liner converting recursion into SEQUENCE+REDUCE
+
+```
+= REDUCE(0; SEQUENCE(B22); LAMBDA(ACC;N; IF(OR(MOD(N;3)=0;MOD(N;5)=0); ACC+N; ACC)))
+```
+
+_(iv)_ one-liner based on array formulas
+
+This one-liner is essentially the following. It creates a sequence 1...999, filters it, and sums it.
 ```
 = LET(
 MULTIPLE_OF_3_OR_5; LAMBDA(N; OR(MOD(N;3)=0; MOD(N;5)=0));
