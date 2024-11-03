@@ -6,7 +6,7 @@ When possible, several solutions are presented:
 - spreadsheet capabilities (use of rows and columns)  
 - one-liner based on recursion  
 - one-liner based on array formulas: recursion converted into SEQUENCE+REDUCE  
-- one-liner based on array formulas: SEQUENCE etc
+- one-liner based on array formulas: SEQUENCE etc.
 
 ## Table of contents
 
@@ -90,7 +90,7 @@ convert string to number: `VALUE`
 _If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000._
 [(source)](https://projecteuler.net/problem=1)
 
-Three solutions are proposed:
+Several solutions are proposed:
 
 _(i)_ spreadsheet capabilities (use of rows and columns),
 
@@ -101,7 +101,7 @@ Recursion is implemented in the same way as factorial above.
 _(iii)_ one-liner converting recursion into SEQUENCE+REDUCE
 
 ```
-= REDUCE(0; SEQUENCE(B22); LAMBDA(ACC;N; IF(OR(MOD(N;3)=0;MOD(N;5)=0); ACC+N; ACC)))
+= REDUCE(0; SEQUENCE(999); LAMBDA(ACC;N; IF(OR(MOD(N;3)=0;MOD(N;5)=0); ACC+N; ACC)))
 ```
 
 _(iv)_ one-liner based on array formulas
@@ -188,13 +188,21 @@ _(iii)_ in the form of a spreadsheet
 
 _2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder. What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?_ [(source)](https://projecteuler.net/problem=5)
 
-Two solutions are proposed:  
-_(i)_ one-liner based on array formulas,   
-_(ii)_ one-liner based on recursion.
+Three solutions are proposed:
+
+_(i)_ one-liner based on recursion
 
 The recursion solution is similar to factorial above.
 
-The one-liner with array formulas is essentially the following. It creates a 1...20 sequence, then reduces it with the 'leas common multiple' (LCM) function:
+_(ii)_ one-liner converting recursion into SEQUENCE+REDUCE
+
+```
+= REDUCE( 1; SEQUENCE(B20); LAMBDA(ACC;N; LCM(ACC;N)))
+```
+
+_(iii)_ one-liner based on array formulas
+
+This one-liner is essentially the following. It creates a 1...20 sequence, then reduces it with the 'leas common multiple' (LCM) function:
 ```
 =REDUCE(1; SEQUENCE(20); LAMBDA(a;v; LCM(a;v)))
 ```
