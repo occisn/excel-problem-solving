@@ -92,7 +92,7 @@ convert string to number: `VALUE`
 _If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000._
 [(source)](https://projecteuler.net/problem=1)
 
-VBA solution:
+VBA solution (and a variant with LongLong):
 ``` VBA
 Public Function ProjectEuler1(n As Long) As Long
    Dim sum, i As Long
