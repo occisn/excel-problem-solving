@@ -12,10 +12,10 @@ When possible, several such solutions are presented:
 
 ## Table of contents
 
-**Tools:** [recursion](#tools-recursion), [array formulas](#tools-array-formulas), [useful functions](#tools-useful-functions)
+**Tools:** [recursion](#tools-recursion), [array formulas](#tools-array-formulas), [useful functions](#tools-useful-functions), [VBA functions on primality](#tools-vba-functions-on-primality)
 
 **Project Euler problems:**
-[1](#project-euler-001-multiples-of-3-or-5), [2](#project-euler-002-even-fibonacci-numbers), ...,  [4](#project-euler-004-largest-palindrome-product), [5](#project-euler-005-smallest-multiple), [6](#project-euler-006-sum-square-difference), ...,  [8](#project-euler-008-largest-product-in-a-series), ...,  [11](#project-euler-011-largest-product-in-a-grid), ..., [13](#project-euler-013-large-sum)
+[1](#project-euler-001-multiples-of-3-or-5), [2](#project-euler-002-even-fibonacci-numbers), ...,  [4](#project-euler-004-largest-palindrome-product), [5](#project-euler-005-smallest-multiple), [6](#project-euler-006-sum-square-difference), [7](#project-euler-007-10001st-prime), ...,  [8](#project-euler-008-largest-product-in-a-series), ...,  [11](#project-euler-011-largest-product-in-a-grid), ..., [13](#project-euler-013-large-sum)
 
 ## Tools: recursion
 
@@ -86,6 +86,35 @@ convert string to number: `VALUE`
 **Digits of a number expressed as a string:**  
 - convert string S to horizontal array of digits: `VALUE(MID(S; SEQUENCE(1; LEN(S)); 1))`  
 - multiply digits of a number expressed as a string S: `PRODUCT(VALUE(MID(S; SEQUENCE(1; LEN(S)); 1)))`
+
+## Tools: VBA functions on primality
+
+Test if a number is prime:
+
+``` VBA
+Function IsPrime(n As Long) As Boolean
+    If (n = 2) Or (n = 3) Or (n = 5) Or (n = 7) Then
+        IsPrime = True
+        Exit Function
+    End If
+    If (n <= 1) Or (n Mod 2 = 0) Or (n Mod 3 = 0) Then
+        IsPrime = False
+        Exit Function
+    End If
+    Dim squareRoot As Double
+    Dim squareRootInt As Long
+    Dim i As Long
+    squareRoot = Sqr(n)
+    squareRootInt = Fix(squareRoot)
+    For i = 5 To squareRootInt Step 6
+        If (n Mod i = 0) Or (n Mod (i + 2) = 0) Then
+            IsPrime = False
+            Exit Function
+        End If
+    Next i
+    IsPrime = True
+End Function
+```
 
 ## Project Euler 001: Multiples of 3 or 5
 
@@ -240,6 +269,32 @@ The one-liner based on array formulas is essentially the following. It creates a
 =SUM( SEQUENCE(100) )^2
       - SUM( MAP(SEQUENCE(100); LAMBDA(a;a^2)) )
 ```
+
+## Project Euler 007: 10001st prime
+
+_By listing the first six prime numbers: 2, 3, 5, 7, 11 and 13, we can see that the 6th prime is 13.  
+What is the 10001st prime number?_  
+[(source)](https://projecteuler.net/problem=7)
+
+VBA solution taking advantage of `IsPrime` function defined above:
+``` VBA
+Function ProjectEuler7(targetRank As Long) As Long
+   Dim n As Long
+   Dim Rank As Long
+   n = 3
+   Rank = 2
+   Do
+      n = n + 2
+      If IsPrime(n) Then
+        Rank = Rank + 1
+      End If
+   Loop Until Rank = targetRank
+   ProjectEuler7 = n
+End Function
+```
+
+TODO : non-VBA solutions
+
 
 ## Project Euler 008: Largest Product in a Series
 
