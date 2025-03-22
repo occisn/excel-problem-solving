@@ -1,8 +1,10 @@
 # excel-problem-solving
 
-This hobby project uses Microsoft Excel (**without VBA**) to solve numeric puzzles as those proposed by Project Euler.
+This hobby project uses Microsoft Excel to solve numeric puzzles as those proposed by Project Euler.
 
-When possible, several solutions are presented:  
+Even if VBA solutions may be proposed, the purpose of this project is to find solutions **without VBA**.
+
+When possible, several such solutions are presented:  
 - spreadsheet capabilities (use of rows and columns)  
 - one-liner based on recursion  
 - one-liner based on array formulas: recursion converted into SEQUENCE+REDUCE  
@@ -90,7 +92,19 @@ convert string to number: `VALUE`
 _If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000._
 [(source)](https://projecteuler.net/problem=1)
 
-Several solutions are proposed:
+VBA solution:
+``` VBA
+Public Function ProjectEuler1(n As Long) As Long
+   Dim sum, i As Long
+   sum = 0
+   For i = 1 To (n - 1)
+      If ((i Mod 3) = 0) Or ((i Mod 5) = 0) Then sum = sum + i
+    Next i
+   ProjectEuler1 = sum
+End Function
+```
+
+Several solutions without VBA are proposed:
 
 _(i)_ spreadsheet capabilities (use of rows and columns),
 
