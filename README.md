@@ -89,6 +89,19 @@ convert string to number: `VALUE`
 
 ## Tools: VBA functions on primality
 
+Return reversed number:
+``` VBA
+Function ReversedNumber(ByVal n As Long) As Long
+    Dim LastDigit As Long
+    ReversedNumber = 0
+    Do While n > 0
+        LastDigit = n Mod 10
+        n = n \ 10
+        ReversedNumber = 10 * ReversedNumber + LastDigit
+    Loop
+End Function
+```
+
 Test if a number is prime:
 
 ``` VBA
@@ -195,7 +208,25 @@ LAMBDA(m
 
 _A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit number is 9009 = 91 x 99. Find the largest palindrome made from the product of two 3-digit numbers._ [(source)](https://projecteuler.net/problem=4)
 
-Three solutions are proposed.
+    VBA solution using `ReversedNumber` function defined above:
+``` VBA
+Function ProjectEuler4(min As Long, max As Long) As Long
+    Dim Product As Long
+    Dim n As Long
+    Dim m As Long
+    ProjectEuler4 = 0
+    For n = min To max
+        For m = n To max
+            Product = n * m
+            If (Product > ProjectEuler4) And (Product = ReversedNumber(Product)) Then
+                ProjectEuler4 = Product
+            End If
+        Next m
+    Next n
+End Function
+```
+
+Three solutions without VBA are proposed.
 
 In file A:
 
