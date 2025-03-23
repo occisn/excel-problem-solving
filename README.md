@@ -262,7 +262,19 @@ _(iii)_ in the form of a spreadsheet
 
 _2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder. What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?_ [(source)](https://projecteuler.net/problem=5)
 
-Three solutions are proposed:
+VBA solution :
+
+``` VBA
+Function ProjectEuler5(n As Long) As Long
+    Dim i As Long
+    ProjectEuler5 = 1
+    For i = 1 To n
+        ProjectEuler5 = WorksheetFunction.Lcm(ProjectEuler5, i)
+    Next i
+End Function
+```
+
+Three solutions without VBA are proposed:
 
 _(i)_ one-liner based on recursion
 
