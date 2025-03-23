@@ -303,7 +303,22 @@ Hence the difference between the sum of the squares of the first ten natural num
 Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum._  
 [(source)](https://projecteuler.net/problem=6)
 
-Two solutions are proposed:  
+VBA solution :
+``` VBA
+Function ProjectEuler6(n As Long) As Long
+    Dim i As Long
+    ProjectEuler6 = 0
+    For i = 1 To n
+        ProjectEuler6 = ProjectEuler6 + i
+    Next i
+    ProjectEuler6 = ProjectEuler6 * ProjectEuler6
+    For i = 1 To n
+        ProjectEuler6 = ProjectEuler6 - i * i
+    Next i
+End Function
+```
+
+Two solutions without VBA are proposed:  
 _(i)_ spreadsheet capabilities (use of rows and columns),  
 _(ii)_ one-liner based on array formulas.
 
