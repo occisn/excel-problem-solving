@@ -43,7 +43,7 @@ Create a vertical array:
 - `{1;2;3;4;5}` creates a vertical array 1...5  
 - `SEQUENCE(10)` creates a vertical array 1...10  
 - `SEQUENCE(1,10)` creates a vertical array 1...10  
-- `SEQUENCE(10)*SEQUENCE(10)` creates a 2D array 1...10 x 1...10  
+- `SEQUENCE(10)*SEQUENCE(1,10)` creates a 2D array 1...10 x 1...10 containing products  
 - trick: `IF({1;0}; 4; 5)` creates a vertical array with two elements: 4 and 5
 
 Return specific element of an array:  
@@ -243,7 +243,7 @@ SUB; LAMBDA(N;CURRENT_MAX;ME; IF(N=0; CURRENT_MAX; ME(N-1; MAX(CURRENT_MAX; SUBS
 SUB(NMAX; 0; SUB))
 ```
 
-_(ii)_ one-liner based on array formulas, creating a 1...999 x 1...999 2D array:
+_(ii)_ one-liner based on array formulas, creating a 1...999 x 1...999 2D array (containing products):
 
 ```
 = LET(
