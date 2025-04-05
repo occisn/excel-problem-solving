@@ -14,7 +14,8 @@ When possible, several such solutions are presented:
 **Tools:** [recursion](#tools-recursion), [array formulas](#tools-array-formulas), [useful functions](#tools-useful-functions), [VBA functions on primality](#tools-vba-functions-on-primality)
 
 **Project Euler problems:**
-[1](#project-euler-001-multiples-of-3-or-5), [2](#project-euler-002-even-fibonacci-numbers), ...,  [4](#project-euler-004-largest-palindrome-product), [5](#project-euler-005-smallest-multiple), [6](#project-euler-006-sum-square-difference), [7](#project-euler-007-10001st-prime), ...,  [8](#project-euler-008-largest-product-in-a-series), ...,  [11](#project-euler-011-largest-product-in-a-grid), ..., [13](#project-euler-013-large-sum)
+[1](#project-euler-001-multiples-of-3-or-5), [2](#project-euler-002-even-fibonacci-numbers), ...,  [4](#project-euler-004-largest-palindrome-product), [5](#project-euler-005-smallest-multiple), [6](#project-euler-006-sum-square-difference), [7](#project-euler-007-10001st-prime), ...,  [8](#project-euler-008-largest-product-in-a-series), 
+[9](#project-euler-009-special-pythagorean-triplet), ...,  [11](#project-euler-011-largest-product-in-a-grid), ..., [13](#project-euler-013-large-sum)
 
 ## Tools: recursion
 
@@ -423,6 +424,72 @@ input_string; $B$19;
 thirteen; $B30;
 STRING_TO_PRODUCT_OF_DIGITS; LAMBDA(S; PRODUCT(VALUE(MID(S; SEQUENCE(1; LEN(S)); 1))));
 MAX(MAP(SEQUENCE(LEN(input_string)-thirteen+1); LAMBDA(POS; STRING_TO_PRODUCT_OF_DIGITS(MID(input_string; POS; thirteen))))))
+```
+
+## Project Euler 009: Special Pythagorean Triplet
+    
+_A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+a2 + b2 = c2  
+For example, 32 + 42 = 9 + 16 = 25 = 52.  
+There exists exactly one Pythagorean triplet for which a + b + c = 1000.  
+Find the product abc._  
+[(source)](https://projecteuler.net/problem=9)
+
+VBA solution :
+
+``` VBA
+Function ProjectEuler9() As Long
+    Dim n As Long, a As Long, b As Long, bmin As Long, bmax As Long, c As Long
+    ProjectEuler9 = -1
+    n = 1000
+    For c = 3 To n
+        ' upper limit for b:
+        '   (i) b < c
+        '   (ii) b = 1000-c-a with a >= 1 thus b <= 1000-c-1
+        ' lower limit for b:
+        '   (i) 1 <= a < b thus b > 1
+        '   (ii) 1000-c = a+b with a < b thus 1000-c < 2b
+        bmax = WorksheetFunction.Min(c - 1, n - c - 1)
+        bmin = WorksheetFunction.Max(2, (n - c) \ 2)
+        For b = bmin To bmax
+            a = n - b - c
+            If c * c = a * a + b * b Then
+                ProjectEuler9 = a * b * c
+                Exit Function
+            End If
+        Next b
+    Next c
+End Function
+```
+
+Two solutions without VBA are proposed:
+
+_(i)_ within file A: one-liner based on array formulas
+
+
+``` excel
+=LET(N;1000;
+   MAX(MAP(SEQUENCE(N-2;1;3);
+      LAMBDA(C;
+         LET(
+            BMIN;MAX(2;INT((N-C)/2));
+            BMAX;MIN(C-1;N-C-1);
+            IF(BMAX >= BMIN;
+               MAX(MAP(SEQUENCE(BMAX-BMIN+1;1;BMIN);LAMBDA(B;
+                  LET(A; N-B-C;
+                     IF(C*C=A*A+B*B;A*B*C;0))));
+               0)))))))
+```
+
+_(ii)_ within file B: spreadsheet capabilities (use of rows and columns)
+
+In each cell:
+``` excel
+=LET(
+   b; $C18;
+   c; R$10;
+   a; 1000-b-c;
+   IF(AND(b >= MAX(2;INT((1000-c)/2)); b <= MIN(c-1;1000-c-1); c*c = b*b + a*a); a*b*c; 0 ))
 ```
 
 ## Project Euler 011: Largest Product in a Grid
