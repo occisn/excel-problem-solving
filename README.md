@@ -7,8 +7,7 @@ Even if VBA solutions may be proposed, the purpose of this project is to find so
 When possible, several such solutions are presented:  
 - spreadsheet capabilities (use of rows and columns)  
 - one-liner based on recursion  
-- one-liner based on array formulas: recursion converted into SEQUENCE+REDUCE  
-- one-liner based on array formulas: SEQUENCE etc.
+- one-liner based on array formulas based on `SEQUENCE`, etc.
 
 ## Table of contents
 
@@ -22,7 +21,7 @@ When possible, several such solutions are presented:
 Recursion can be achieved by the use of `LET` and `LAMBDA`.
 
 For instance, this formula calculates 10!:
-```
+``` excel
 = LET(
 SUB; LAMBDA(ME;N; IF(N=0; 1; N*ME(ME; N-1)));
 SUB(SUB; 10))
@@ -30,7 +29,7 @@ SUB(SUB; 10))
 Value: 3628800
 
 The same with tail-call recursion:
-```
+``` excel
 =LET(
 SUB; LAMBDA(ME;ACC;N; IF(N=0; ACC; ME(ME;ACC*N; N-1)));
 SUB(SUB; 1; 10))
@@ -152,26 +151,33 @@ _(i)_ spreadsheet capabilities (use of rows and columns),
 
 _(ii)_ one-liner based on recursion
 
-Recursion is implemented in the same way as factorial above.
+Recursion is implemented in the same way as factorial above :
 
-_(iii)_ one-liner converting recursion into SEQUENCE+REDUCE
-
+``` excel
+=LET(
+MULTIPLE_OF_3_OR_5; LAMBDA(N;OR(MOD(N;3)=0;MOD(N;5)=0));
+SUB; LAMBDA(ME;N; IF(N=0; 0; IF(MULTIPLE_OF_3_OR_5(N); N+ME(ME;N-1); ME(ME;N-1))));
+SUB(SUB; D11))
 ```
+
+_(iii)_ one-liner converting recursion into `SEQUENCE` adn `REDUCE`
+
+``` excel
 = REDUCE(0; SEQUENCE(999); LAMBDA(ACC;N; IF(OR(MOD(N;3)=0;MOD(N;5)=0); ACC+N; ACC)))
 ```
 
 _(iv)_ one-liner based on array formulas
 
 This one-liner is essentially the following. It creates a sequence 1...999, filters it, and sums it.
-```
+``` excel
 = LET(
 MULTIPLE_OF_3_OR_5; LAMBDA(N; OR(MOD(N;3)=0; MOD(N;5)=0));
 FILTER_MULTIPLE_OF_3_OR_5; LAMBDA(N; IF(MULTIPLE_OF_3_OR_5(N); N; 0));
 SUM( MAP( SEQUENCE(999); FILTER_MULTIPLE_OF_3_OR_5)))
 ```
 
-~LET~ is used to improve readibility, but is not necessary:
-```
+`LET` is used to improve readibility, but is not necessary:
+``` excel
 = SUM( MAP( SEQUENCE(B21); LAMBDA(N; IF(OR(MOD(N;3)=0; MOD(N;5)=0); N; 0))))
 ```
 
@@ -188,12 +194,12 @@ _(i)_ spreadsheet capabilities (use of rows and columns),
 _(ii)_ one-liner based on array formulas.
 
 N-th Fibonacci number :
-```
+``` excel
 LAMBDA(n; IF(n=1; 0; INDEX( REDUCE({0;1}; SEQUENCE(n-1); LAMBDA(x;y; IF({1;0}; INDEX(x;2); SUM(x)))); 2 )))
 ```
 
 Make Fibonacci sequence:
-```
+``` excel
 LAMBDA(m
    REDUCE(0;
       SEQUENCE(m);
@@ -208,7 +214,7 @@ LAMBDA(m
 
 _A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit number is 9009 = 91 x 99. Find the largest palindrome made from the product of two 3-digit numbers._ [(source)](https://projecteuler.net/problem=4)
 
-    VBA solution using `ReversedNumber` function defined above:
+VBA solution using `ReversedNumber` function defined above:
 ``` VBA
 Function ProjectEuler4(min As Long, max As Long) As Long
     Dim Product As Long
@@ -232,7 +238,7 @@ In file A:
 
 _(i)_ one-liner based on double recursion:
 
-```
+``` excel
 = LET(
 NMAX; 999;
 SUB_REVERSED; LAMBDA(ACC;N;ME; IF(N<10; 10*ACC+N; ME(10*ACC+MOD(N;10); QUOTIENT(N;10); ME)));
@@ -245,7 +251,7 @@ SUB(NMAX; 0; SUB))
 
 _(ii)_ one-liner based on array formulas, creating a 1...999 x 1...999 2D array (containing products):
 
-```
+``` excel
 = LET(
 NMAX; 999;
 SUB_REVERSED; LAMBDA(ACC;N;ME; IF(N<10; 10*ACC+N; ME(10*ACC+MOD(N;10); QUOTIENT(N;10); ME)));
@@ -257,6 +263,16 @@ MAX(MAP(SEQUENCE(NMAX)*SEQUENCE(1;NMAX); LAMBDA(N; IF(IS_PALINDROMIC(N); N; 0)))
 
 In file B (around 19 Mo):  
 _(iii)_ in the form of a spreadsheet
+
+In O26 cell:
+``` excel
+=IF(O$15>$D26; 0; LET(
+SUB_REVERSED; LAMBDA(ACC;N;ME; IF(N<10; 10*ACC+N; ME(10*ACC+MOD(N;10); QUOTIENT(N;10); ME)));
+REVERSED_NUMBER; LAMBDA(N; SUB_REVERSED(0; N; SUB_REVERSED));
+PRODUCT; O$15*$D26;
+REVERSED_PRODUCT; REVERSED_NUMBER(PRODUCT);
+IF(PRODUCT = REVERSED_PRODUCT; PRODUCT; 0)))
+```
 
 ## Project Euler 005: Smallest Multiple
 
@@ -279,6 +295,11 @@ Three solutions without VBA are proposed:
 _(i)_ one-liner based on recursion
 
 The recursion solution is similar to factorial above.
+``` excel
+=LET(
+SUB; LAMBDA(ME;N; IF(N=1; 1; LCM(N; ME(ME; N-1))));
+SUB(SUB; D10))
+```
 
 _(ii)_ one-liner converting recursion into SEQUENCE+REDUCE
 
@@ -380,9 +401,29 @@ _The four adjacent digits in the 1000-digit number that have the greatest produc
 Find the thirteen adjacent digits in the 1000-digit number that have the greatest product.   What is the value of this product?_  
 [(source)](https://projecteuler.net/problem=8)
 
-Two solutions are proposed :  
-_(i)_ spreadsheet capabilities (use of rows and columns),  
+Two solutions are proposed :
+
+_(i)_ spreadsheet capabilities (use of rows and columns)
+
 _(ii)_ one-liner based on array formulas (with two variants).
+
+The first calculates the product of the digits of a number:
+``` excel
+=LET(
+input_string; $B$19;
+thirteen; $B22;
+PRODUCT_OF_DIGITS; LAMBDA(N; INDEX(REDUCE(IF({1;0}; 1; N); SEQUENCE(LEN(N)); LAMBDA(ACC;N; IF({1;0}; INDEX(ACC; 1) * MOD(INDEX(ACC; 2); 10); QUOTIENT(INDEX(ACC; 2); 10)))); 1));
+MAX(MAP(SEQUENCE(LEN(input_string)-thirteen+1); LAMBDA(POS; PRODUCT_OF_DIGITS(VALUE(MID(input_string; POS; thirteen)))))))
+```
+
+The second does the same when the number is presented as a string:
+```excel
+=LET(
+input_string; $B$19;
+thirteen; $B30;
+STRING_TO_PRODUCT_OF_DIGITS; LAMBDA(S; PRODUCT(VALUE(MID(S; SEQUENCE(1; LEN(S)); 1))));
+MAX(MAP(SEQUENCE(LEN(input_string)-thirteen+1); LAMBDA(POS; STRING_TO_PRODUCT_OF_DIGITS(MID(input_string; POS; thirteen))))))
+```
 
 ## Project Euler 011: Largest Product in a Grid
 
