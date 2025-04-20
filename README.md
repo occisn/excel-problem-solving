@@ -17,9 +17,6 @@ When possible, several such solutions are presented:
 [1](#project-euler-001-multiples-of-3-or-5), [2](#project-euler-002-even-fibonacci-numbers), ...,  [4](#project-euler-004-largest-palindrome-product), [5](#project-euler-005-smallest-multiple), [6](#project-euler-006-sum-square-difference), [7](#project-euler-007-10001st-prime), ...,  [8](#project-euler-008-largest-product-in-a-series), 
 [9](#project-euler-009-special-pythagorean-triplet), ...,  [11](#project-euler-011-largest-product-in-a-grid), ..., [13](#project-euler-013-large-sum)
 
-**Annexes:**  
-[Annex: VBA function to measure execution duration](#annex-vba-function-to-measure-execution-duration)
-
 ## Tools: recursion
 
 Recursion can be achieved by the use of `LET` and `LAMBDA`.
@@ -533,23 +530,5 @@ _(ii)_ one-liner. **_TODO_**
 
 Excel cannot handle numbers with so many significant digits. But they can be stored in strings, and be manipulated under that form.  
 Solution _(i)_ breaks down each number into digits, and adds all digits from the right-most to the left-most, while keeping track of the carry.
-
-## Annex: VBA function to measure execution duration
-
-To be inserted in 'ThisWorkbook' (and not as a new module):
-
-``` VBA
-Dim startTime As Double
-
-Private Sub Workbook_SheetCalculate(ByVal Sh As Object)
-    Dim duration As Double
-    duration = Timer - startTime
-    MsgBox "Calculation took " & Format(duration, "0.000") & " seconds", vbInformation, "Timing Complete"
-End Sub
-
-Private Sub Workbook_SheetChange(ByVal Sh As Object, ByVal Target As Range)
-    startTime = Timer
-End Sub
-```
 
 (end of README)
