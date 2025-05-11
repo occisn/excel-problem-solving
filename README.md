@@ -2,6 +2,8 @@
 
 This hobby project uses Microsoft Excel to solve numeric puzzles as those proposed by Project Euler.
 
+This is a personal, exploratory project with no fixed roadmap. Its aim is essentially to improve my skills. Development happens irregularly as time permits.
+
 Even if VBA solutions may be proposed, the purpose of this project is to find solutions **without VBA**.
 
 When possible, several such solutions are presented:  
