@@ -6,7 +6,7 @@ This is a personal, exploratory project with no fixed roadmap. Its aim is essent
 
 Currently, it uses Microsoft Excel. Even if VBA solutions may be proposed, the purpose of this project is to find solutions *without VBA*.
 
-The objective is to move to open source alternative as Libre Office or Only Office.
+The objective is to move to open source alternatives as Libre Office or Only Office.
 
 When possible, several such solutions are presented:  
 - spreadsheet capabilities (use of rows and columns)  
